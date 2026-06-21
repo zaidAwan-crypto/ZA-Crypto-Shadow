@@ -223,7 +223,11 @@
                 else if (activeLayer === 3 && inputData.startsWith("L3-")) {
                     let cleanData = inputData.substring(3);
                     let reverseMap = { '₹': 'A', '🔑': 'E', '🔥': 'I', '💎': 'O', '⚡': 'U', '♠': 'a', '♣': 'e', '♥': 'i', '♦': 'o', '★': 'u' };
-                    let restoredB64 = cleanData.split('').map(char => reverseMap[char] || char).join('');
+                    
+                    // FIX: Emojis ko todne se bachane ke liye Array.from ka use kiya hai
+                    let charsArray = Array.from(cleanData);
+                    let restoredB64 = charsArray.map(char => reverseMap[char] || char).join('');
+                    
                     let decryptedStr = atob(restoredB64);
                     if (decryptedStr.endsWith("::" + key)) {
                         result = decryptedStr.split("::")[0];
@@ -251,7 +255,8 @@
 
     function shareToWhatsApp() {
         let text = document.getElementById('output-text').innerText;
-        let url = `https://api.whatsapp.com/send?text=${encodeURIComponent("🔒 KHUFIYA CODE: " + text)}`;
+        // FIX: Faltu text bilkul khatam, ab sirf aur sirf secure code share hoga
+        let url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
     }
 </script>
