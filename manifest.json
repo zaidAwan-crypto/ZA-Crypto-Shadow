@@ -1,0 +1,21 @@
+{
+  "short_name": "ZA Shadow",
+  "name": "ZA Crypto-Shadow Web Engine",
+  "icons": [
+    {
+      "src": "https://zaidawan-crypto.github.io/ZA-Flappy-Bird/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://zaidawan-crypto.github.io/ZA-Flappy-Bird/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#030704",
+  "theme_color": "#00ff66",
+  "display": "standalone",
+  "orientation": "portrait"
+}

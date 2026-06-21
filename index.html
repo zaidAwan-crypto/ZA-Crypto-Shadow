@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZA Crypto-Shadow Web Engine v3.0</title>
+    
+    <!-- PWA MANIFEST LINK -->
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+        body { background: #030704; color: #00ff66; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+        
+        .hacker-container {
+            width: 100%; max-width: 450px; background: rgba(5, 15, 5, 0.95); 
+            border: 2px solid #00ff66; border-radius: 16px; padding: 25px;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2); position: relative;
+        }
+
+        h1 { font-size: 24px; text-align: center; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #00ff66; margin-bottom: 5px; }
+        .version { font-size: 10px; color: #008833; text-align: center; margin-bottom: 25px; text-transform: uppercase; }
+
+        .layer-selector {
+            display: flex; gap: 8px; margin-bottom: 20px; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 8px; border: 1px solid #004411;
+        }
+        .layer-btn {
+            flex: 1; padding: 10px 5px; background: none; border: 1px solid transparent; color: #008833; 
+            font-size: 11px; font-weight: bold; cursor: pointer; border-radius: 6px; text-transform: uppercase;
+        }
+        .layer-btn.active { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
+
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-size: 12px; color: #00aa44; margin-bottom: 6px; text-transform: uppercase; }
+        
+        textarea, input {
+            width: 100%; background: #000; border: 1px solid #004411; padding: 12px; border-radius: 8px;
+            color: #00ff66; font-size: 14px; transition: 0.3s; resize: none;
+        }
+        textarea:focus, input:focus { border-color: #00ff66; outline: none; box-shadow: 0 0 8px rgba(0,255,102,0.3); }
+
+        .btn-panel { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .btn {
+            flex: 1; min-width: 100px; background: #004411; color: #00ff66; border: 1px solid #00ff66; padding: 14px;
+            border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; text-transform: uppercase;
+            transition: 0.2s; box-shadow: 0 4px 12px rgba(0,68,17,0.4);
+        }
+        .btn:hover { background: #00ff66; color: #000; box-shadow: 0 0 15px #00ff66; }
+        .btn:active { transform: scale(0.98); }
+
+        .btn-reset { background: #220000; color: #ff3333; border: 1px solid #ff3333; }
+        .btn-reset:hover { background: #ff3333; color: #000; box-shadow: 0 0 15px #ff3333; }
+
+        .output-panel {
+            margin-top: 25px; background: rgba(0, 0, 0, 0.8); border-radius: 8px;
+            padding: 15px; border: 1px dashed #00ff66; display: none; word-break: break-all;
+        }
+        .output-header { font-size: 11px; color: #008833; margin-bottom: 8px; text-transform: uppercase; display: flex; justify-content: space-between; }
+        #output-text { font-size: 15px; font-weight: bold; line-height: 1.4; color: #fff; text-shadow: 0 0 5px #fff; }
+
+        .share-btn {
+            background: #25d366; color: white; border: none; font-family: sans-serif;
+            margin-top: 12px; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold;
+            cursor: pointer; display: none; text-align: center; font-size: 13px; text-transform: uppercase;
+        }
+
+        /* ADSTERRA ADS CONTAINER */
+        .ad-container {
+            width: 100%; max-width: 320px; min-height: 50px; margin: 15px auto; 
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP AD BANNER 320x50 -->
+<div class="ad-container" id="ad-top">
+    <script>
+      atOptions = {
+        'key' : '90189c871ed62cb66716bfd097dfbff2',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/90189c871ed62cb66716bfd097dfbff2/invoke.js"></script>
+</div>
+
+<div class="hacker-container">
+    <h1>ZA SHADOW CODE</h1>
+    <div class="version">Secure Multi-Layer Terminal v3.0</div>
+
+    <label style="text-align: center; margin-bottom: 8px;">Select Security Layer:</label>
+    <div class="layer-selector">
+        <button class="layer-btn active" id="btn-l1" onclick="switchLayer(1)">Layer 1</button>
+        <button class="layer-btn" id="btn-l2" onclick="switchLayer(2)">Layer 2</button>
+        <button class="layer-btn" id="btn-l3" onclick="switchLayer(3)">Layer 3</button>
+    </div>
+
+    <div class="input-group">
+        <label id="label-msg">Enter Plain Text / Secret Code:</label>
+        <textarea id="main-input" rows="4" placeholder="Type here..."></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Secret Key (Password):</label>
+        <input type="text" id="secret-key" placeholder="e.g. ZA-786">
+    </div>
+
+    <div class="btn-panel">
+        <button class="btn" onclick="processCrypto(true)">Encrypt</button>
+        <button class="btn" onclick="processCrypto(false)">Decode</button>
+        <button class="btn btn-reset" onclick="clearTerminal()">Clear</button>
+    </div>
+
+    <div class="output-panel" id="output-zone">
+        <div class="output-header">
+            <span id="output-title">Result Matrix:</span>
+            <span style="cursor: pointer; color: #00ff66;" onclick="copyResultText()">[Copy]</span>
+        </div>
+        <div id="output-text"></div>
+    </div>
+
+    <button class="share-btn" id="wa-share-btn" onclick="shareToWhatsApp()">🚀 Send Via WhatsApp</button>
+</div>
+
+<!-- BOTTOM AD BANNER 320x50 -->
+<div class="ad-container" id="ad-bottom">
+    <script>
+      atOptions = {
+        'key' : '90189c871ed62cb66716bfd097dfbff2',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/90189c871ed62cb66716bfd097dfbff2/invoke.js"></script>
+</div>
+
+<!-- ADSTERRA POPUNDER SCRIPT -->
+<script src="https://pl29596695.effectivecpmnetwork.com/dc/29/c7/dc29c7da7698883520f1deb51f97c84f.js"></script>
+
+<script>
+    let activeLayer = 1;
+
+    function switchLayer(layerNum) {
+        activeLayer = layerNum;
+        document.querySelectorAll('.layer-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`btn-l${layerNum}`).classList.add('active');
+        const mainInput = document.getElementById('main-input');
+        mainInput.style.borderColor = '#00ff66';
+        setTimeout(() => mainInput.style.borderColor = '#004411', 200);
+    }
+
+    function clearTerminal() {
+        document.getElementById('main-input').value = "";
+        document.getElementById('secret-key').value = "";
+        document.getElementById('output-text').innerText = "";
+        document.getElementById('output-zone').style.display = 'none';
+        document.getElementById('wa-share-btn').style.display = 'none';
+        switchLayer(1);
+    }
+
+    function processCrypto(isEncrypt) {
+        const inputData = document.getElementById('main-input').value.trim();
+        const key = document.getElementById('secret-key').value.trim();
+        const outputZone = document.getElementById('output-zone');
+        const outputText = document.getElementById('output-text');
+        const waBtn = document.getElementById('wa-share-btn');
+
+        if (!inputData || !key) {
+            alert("SYSTEM ERROR: Input Text and Secret Key required!");
+            return;
+        }
+
+        let result = "";
+
+        if (isEncrypt) {
+            if (activeLayer === 1) {
+                let initial = btoa(unescape(encodeURIComponent(inputData)));
+                result = "L1-" + btoa(unescape(encodeURIComponent(initial + "[KEY]:" + key)));
+            } 
+            else if (activeLayer === 2) {
+                let salted = inputData + "||" + key;
+                let hexArr = [];
+                for (let i = 0; i < salted.length; i++) {
+                    hexArr.push((salted.charCodeAt(i) ^ 42).toString(16));
+                }
+                result = "L2-" + hexArr.join("☠️");
+            } 
+            else if (activeLayer === 3) {
+                let combined = inputData + "::" + key;
+                let encoded = btoa(combined);
+                let symbolMap = { 'A': '₹', 'E': '🔑', 'I': '🔥', 'O': '💎', 'U': '⚡', 'a': '♠', 'e': '♣', 'i': '♥', 'o': '♦', 'u': '★' };
+                result = "L3-" + encoded.split('').map(char => symbolMap[char] || char).join('');
+            }
+            
+            waBtn.style.display = 'block';
+            document.getElementById('output-title').innerText = `Encrypted via Layer ${activeLayer}:`;
+        } else {
+            try {
+                if (activeLayer === 1 && inputData.startsWith("L1-")) {
+                    let cleanData = inputData.substring(3);
+                    let step1 = decodeURIComponent(escape(atob(cleanData)));
+                    if (step1.endsWith("[KEY]:" + key)) {
+                        let originalBase = step1.split("[KEY]:")[0];
+                        result = decodeURIComponent(escape(atob(originalBase)));
+                    } else { throw new Error(); }
+                } 
+                else if (activeLayer === 2 && inputData.startsWith("L2-")) {
+                    let cleanData = inputData.substring(3);
+                    let hexArr = cleanData.split("☠️");
+                    let decryptedStr = "";
+                    for (let i = 0; i < hexArr.length; i++) {
+                        decryptedStr += String.fromCharCode(parseInt(hexArr[i], 16) ^ 42);
+                    }
+                    if (decryptedStr.endsWith("||" + key)) {
+                        result = decryptedStr.split("||")[0];
+                    } else { throw new Error(); }
+                } 
+                else if (activeLayer === 3 && inputData.startsWith("L3-")) {
+                    let cleanData = inputData.substring(3);
+                    let reverseMap = { '₹': 'A', '🔑': 'E', '🔥': 'I', '💎': 'O', '⚡': 'U', '♠': 'a', '♣': 'e', '♥': 'i', '♦': 'o', '★': 'u' };
+                    let restoredB64 = cleanData.split('').map(char => reverseMap[char] || char).join('');
+                    let decryptedStr = atob(restoredB64);
+                    if (decryptedStr.endsWith("::" + key)) {
+                        result = decryptedStr.split("::")[0];
+                    } else { throw new Error(); }
+                } 
+                else {
+                    result = "⚠️ CORE ERROR: Security Layer mismatch! Open correct gate section.";
+                }
+            } catch (e) {
+                result = "❌ ACCESS DENIED: Invalid Password or Wrong Security Layer configuration.";
+            }
+            waBtn.style.display = 'none';
+            document.getElementById('output-title').innerText = "Decoded Secure Output:";
+        }
+
+        outputText.innerText = result;
+        outputZone.style.display = 'block';
+    }
+
+    function copyResultText() {
+        let text = document.getElementById('output-text').innerText;
+        navigator.clipboard.writeText(text);
+        alert("Cipher code copied to terminal clipboard!");
+    }
+
+    function shareToWhatsApp() {
+        let text = document.getElementById('output-text').innerText;
+        let url = `https://api.whatsapp.com/send?text=${encodeURIComponent("🔒 KHUFIYA CODE: " + text)}`;
+        window.open(url, '_blank');
+    }
+</script>
+</body>
+</html>
