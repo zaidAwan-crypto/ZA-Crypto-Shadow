@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="google-site-verification" content="bz3MC-7O4Bn-v7FLyrhpGNN2FhjIdN8mk7-ka18KbcI" />
+
     <title>ZA Crypto-Shadow Web Engine v3.0</title>
     
-    <!-- PWA MANIFEST LINK -->
     <link rel="manifest" href="manifest.json">
 
     <style>
@@ -73,7 +75,6 @@
 </head>
 <body>
 
-<!-- TOP AD BANNER 320x50 -->
 <div class="ad-container" id="ad-top">
     <script>
       atOptions = {
@@ -125,7 +126,6 @@
     <button class="share-btn" id="wa-share-btn" onclick="shareToWhatsApp()">🚀 Send Via WhatsApp</button>
 </div>
 
-<!-- BOTTOM AD BANNER 320x50 -->
 <div class="ad-container" id="ad-bottom">
     <script>
       atOptions = {
@@ -139,7 +139,6 @@
     <script src="https://www.highperformanceformat.com/90189c871ed62cb66716bfd097dfbff2/invoke.js"></script>
 </div>
 
-<!-- ADSTERRA POPUNDER SCRIPT -->
 <script src="https://pl29596695.effectivecpmnetwork.com/dc/29/c7/dc29c7da7698883520f1deb51f97c84f.js"></script>
 
 <script>
@@ -224,7 +223,6 @@
                     let cleanData = inputData.substring(3);
                     let reverseMap = { '₹': 'A', '🔑': 'E', '🔥': 'I', '💎': 'O', '⚡': 'U', '♠': 'a', '♣': 'e', '♥': 'i', '♦': 'o', '★': 'u' };
                     
-                    // FIX: Emojis ko todne se bachane ke liye Array.from ka use kiya hai
                     let charsArray = Array.from(cleanData);
                     let restoredB64 = charsArray.map(char => reverseMap[char] || char).join('');
                     
@@ -255,7 +253,6 @@
 
     function shareToWhatsApp() {
         let text = document.getElementById('output-text').innerText;
-        // FIX: Faltu text bilkul khatam, ab sirf aur sirf secure code share hoga
         let url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
     }
